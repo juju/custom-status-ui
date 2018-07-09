@@ -9,9 +9,10 @@ import processDelta from './store';
 function renderApp(data = {}) {
   const container = document.querySelector('.wrapper');
   const existingNode = container.querySelector('.app');
+  const modelName = Object.keys(data.models || {})[0];
   render(
     <div class="app">
-      <Header />
+      <Header modelName={modelName}/>
       <Applications applications={data.applications} units={data.units}/>
       <Machines machines={data.machines}/>
     </div>, container, existingNode);

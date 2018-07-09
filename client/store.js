@@ -3,6 +3,7 @@ import merge from 'deepmerge';
 const modelState = {
   applications: {},
   machines: {},
+  models: {},
   units: {}
 };
 
@@ -16,9 +17,12 @@ function processDelta(deltas) {
     // If there is a handler for the delta type then pass the data to it.
     // delta[0] will be one of 'relation', 'application', 'machine', 'relation',
     // 'unit'.
+    // Our server adds another non-standard delta called 'model' for sending
+    // the model info down the same stream. See server/juju.js for how this is
+    // performed.
     // For this application we're only concerned with the 'application',
-    // 'machine', and 'unit' deltas.
-    if (['application', 'machine', 'unit'].includes(delta[0])) {
+    // 'machine', and 'unit' deltas as well as the non-standard 'model' delta.
+    if (['application', 'machine', 'model', 'unit'].includes(delta[0])) {
       const data = delta[2];
       const section = modelState[delta[0] + 's'];
       // The key value differs depending on the delta.
