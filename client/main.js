@@ -2,18 +2,17 @@ import { h, render } from 'preact';
 
 import Applications from './components/applications';
 import Header from './components/header';
-import Notifications from './components/notifications';
 
 import processDelta from './store';
 
 function renderApp(data = {}) {
-  render((
-    <div>
+  const container = document.querySelector('.wrapper');
+  const existingNode = container.querySelector('.app');
+  render(
+    <div class="app">
       <Header />
-      <Notifications />
-      <Applications data={data.applications}/>
-    </div>
-  ), document.querySelector('.wrapper .app'));
+      <Applications applications={data.applications} units={data.units}/>
+    </div>, container, existingNode);
 }
 
 function connectWebsocket() {
