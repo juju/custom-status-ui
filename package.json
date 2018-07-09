@@ -5,17 +5,21 @@
   "main": "index.html",
   "dependencies": {
     "bulma": "^0.7.1",
+    "deepmerge": "^2.1.1",
     "preact": "^8.2.9",
     "websocket": "^1.0.26"
   },
   "devDependencies": {
     "babel-plugin-transform-react-jsx": "^6.24.1",
+    "eslint": "^5.1.0",
+    "eslint-plugin-react": "^7.10.0",
     "node-sass": "^4.9.1",
     "parcel-bundler": "^1.9.4"
   },
   "scripts": {
+    "clean": "rm -rf ./dist/",
     "dev": "parcel client/index.html",
-    "clean": "rm -rf ./dist/"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
