@@ -23,11 +23,16 @@ function processDelta(deltas) {
       const section = modelState[delta[0] + 's'];
       // The key value differs depending on the delta.
       const key = delta[0] === 'machine' ? 'id' : 'name';
-      if (delta[1] === 'change') {
-        if (!section[data[key]]) {
-          section[data[key]] = {};
-        }
-        section[data[key]] = merge(section[data[key]], data);
+      switch (delta[1]) {
+        case 'change':
+          if (!section[data[key]]) {
+            section[data[key]] = {};
+          }
+          section[data[key]] = merge(section[data[key]], data);
+          break;
+        case 'remove':
+          delete section[data[key]];
+          break;
       }
     }
   });
