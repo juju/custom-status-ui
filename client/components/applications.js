@@ -1,7 +1,25 @@
+import classnames from 'classnames';
 import {h} from 'preact';
 
-import Application from './application';
-import Unit from './unit';
+const Application = props =>
+  <div class="field is-grouped">
+    <a class="button is-text column is-2">{props.application.name}</a>
+    <div class="buttons has-addons">
+      {props.units}
+    </div>
+  </div>;
+
+const Unit = data => {
+  const agentStatus = data.data['agent-status'].current;
+  const classes = classnames(
+    'button',
+    'is-selected', {
+      'is-danger': agentStatus === 'error',
+      'is-warning': agentStatus !== 'error' && agentStatus !== 'idle',
+      'is-success': agentStatus === 'idle'
+    });
+  return <span class={classes}>0</span>;
+};
 
 function listApplications(applications = {}, units = {}) {
   return Object
