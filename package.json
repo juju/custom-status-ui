@@ -5,6 +5,7 @@
   "main": "index.html",
   "dependencies": {
     "bulma": "^0.7.1",
+    "classnames": "^2.2.6",
     "deepmerge": "^2.1.1",
     "preact": "^8.2.9",
     "websocket": "^1.0.26"
