@@ -11,7 +11,7 @@ const server = http.createServer((req, res) => {
 });
 server.listen(8080, () => console.log('Server is listening on port 8080'));
 
-wsServer = new WebSocketServer({
+const wsServer = new WebSocketServer({
   httpServer: server,
   autoAcceptConnections: false
 });
