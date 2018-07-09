@@ -48,6 +48,14 @@ function connectAndWatch({controllerIP, modelUUID, userName, password}, onMessag
         onMessage(result);
       });
       callback(null, handle);
+
+      client.modelInfo((err, data) => {
+        if (err) {
+          console.log('cannot fetch model info:', err);
+          return;
+        }
+        onMessage({deltas: [['model', 'change', {name: data.name}]]});
+      });
     });
   });
 }
