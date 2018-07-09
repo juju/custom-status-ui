@@ -2,6 +2,7 @@ import { h, render } from 'preact';
 
 import Applications from './components/applications';
 import Header from './components/header';
+import Machines from './components/machines';
 
 import processDelta from './store';
 
@@ -12,6 +13,7 @@ function renderApp(data = {}) {
     <div class="app">
       <Header />
       <Applications applications={data.applications} units={data.units}/>
+      <Machines machines={data.machines}/>
     </div>, container, existingNode);
 }
 
