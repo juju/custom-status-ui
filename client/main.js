@@ -6,6 +6,11 @@ import Machines from './components/machines';
 
 import processDelta from './store';
 
+/**
+  Renders the application using the supplied data object.
+  @param {Object} data - The data to render, in the format:
+    {applications: {}, units: {}, machines: {}}
+*/
 function renderApp(data = {}) {
   const container = document.querySelector('.wrapper');
   const existingNode = container.querySelector('.app');
@@ -18,8 +23,11 @@ function renderApp(data = {}) {
     </div>, container, existingNode);
 }
 
+/**
+  Connect to the websocket server.
+*/
 function connectWebsocket() {
-  const socket = new WebSocket('ws://192.168.64.6:8080');
+  const socket = new WebSocket(`ws://${window.location.hostname}:8080`);
   socket.addEventListener('open', e => socket.send('start'));
 
   socket.addEventListener('message', e => {
