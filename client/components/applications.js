@@ -1,6 +1,11 @@
 import classnames from 'classnames';
 import {h} from 'preact';
 
+/**
+  Individual application component.
+  @param {Object} props - An object containing {application: 'modelname'}.
+  @return {Function} The rendered application component.
+*/
 const Application = props =>
   <div class="field is-grouped">
     <a class="button is-text column is-2">{props.application.name}</a>
@@ -9,8 +14,13 @@ const Application = props =>
     </div>
   </div>;
 
-const Unit = data => {
-  const agentStatus = data.data['agent-status'].current;
+/**
+  Individual unit component.
+  @param {data} The unit data in the format {data: {'agent-status': {current: 'idle'}}.
+  @return {Function} The rendered unit component.
+*/
+const Unit = props => {
+  const agentStatus = props.data['agent-status'].current;
   const classes = classnames(
     'button',
     'is-selected', {
@@ -21,6 +31,22 @@ const Unit = data => {
   return <span class={classes}>0</span>;
 };
 
+/**
+  Applications list component.
+  @param {Object} props - An object containing {application: {}, units: {}}.
+  @return {Function} The rendered application list component.
+*/
+const Applications = props =>
+  <div class="applications">
+    <h2 class="title is-4">Applications</h2>
+    {listApplications(props.applications, props.units)}
+  </div>;
+
+/**
+  Generate the list of applications
+  @param {Object} applications - A list of application objects.
+  @param {Object} units - A list of unit objects.
+*/
 function listApplications(applications = {}, units = {}) {
   return Object
     .keys(applications)
@@ -36,11 +62,5 @@ function listApplications(applications = {}, units = {}) {
       return <Application application={applications[applicationKey]} units={unitElements}/>;
     });
 }
-
-const Applications = props =>
-  <div class="applications">
-    <h2 class="title is-4">Applications</h2>
-    {listApplications(props.applications, props.units)}
-  </div>;
 
 export default Applications;
