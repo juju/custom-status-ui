@@ -49,6 +49,8 @@ function connectAndWatch({controllerIP, modelUUID, userName, password}, onMessag
       });
       callback(null, handle);
 
+      // Fetch the model info and then send just the name to the client as a delta.
+      // This is a non-standard delta sent from this server, not from Juju.
       client.modelInfo((err, data) => {
         if (err) {
           console.log('cannot fetch model info:', err);
