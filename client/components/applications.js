@@ -20,7 +20,8 @@ const Application = props =>
   @return {Function} The rendered unit component.
 */
 const Unit = props => {
-  const agentStatus = props.data['agent-status'].current;
+  const data = props.data;
+  const agentStatus = data['agent-status'].current;
   const classes = classnames(
     'button',
     'is-selected', {
@@ -28,7 +29,7 @@ const Unit = props => {
       'is-warning': agentStatus !== 'error' && agentStatus !== 'idle',
       'is-success': agentStatus === 'idle'
     });
-  return <span class={classes}>0</span>;
+  return <span class={classes}>{data.name.split('/')[1]}</span>;
 };
 
 /**
