@@ -22,7 +22,7 @@ function generateHardwareCharacteristics(data = {}) {
   return Object
     .keys(data)
     .map(key => `${key}: ${data[key]}, `)
-    .reduce((final, current) => final += current);
+    .reduce((final, current) => final += current, '');
 }
 
 /**
